@@ -2,7 +2,8 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import connectDb from "./config/db.js";
-import authRouter from "./routes/authRoutes.js";
+import authRoutes from "./routes/authRoutes.js";
+import incomeRoutes from "./routes/incomeRoutes.js";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -31,7 +32,8 @@ app.get("/", (req, res) => {
 
 connectDb();
 
-app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/income", incomeRoutes);
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
