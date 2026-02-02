@@ -27,7 +27,14 @@ export const addIncome = async (req, res) => {
   }
 };
 
-export const getAllIncome = async (req, res) => {};
+export const getAllIncome = async (req, res) => {
+  const userId = req.user.id;
+
+  try {
+    const income = await Income.find({ userId }).sort({ date: -1 });
+    res.json(income);
+  } catch (error) {}
+};
 
 export const deleteIncome = async (req, res) => {};
 
