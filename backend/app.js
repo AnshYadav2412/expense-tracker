@@ -3,6 +3,10 @@ import cors from "cors";
 import path from "path";
 import connectDb from "./config/db.js";
 import authRouter from "./routes/authRoutes.js";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -28,6 +32,8 @@ app.get("/", (req, res) => {
 connectDb();
 
 app.use("/api/v1/auth", authRouter);
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.listen(PORT, () => {
   console.log(`Server running at port ${PORT}`);
