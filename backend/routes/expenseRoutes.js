@@ -1,0 +1,19 @@
+import express from "express";
+
+import {
+  addExpense,
+  getAllExpense,
+  deleteExpense,
+  downloadExpenseExcel,
+} from "../controllers/expenseController.js";
+
+import { protect } from "../middlewares/authMiddleware.js";
+
+const router = express.Router();
+
+router.post("/add", protect, addExpense);
+router.get("/get", protect, getAllExpense);
+router.delete("/:id", protect, deleteExpense);
+router.get("/downloadExcel", protect, downloadExpenseExcel);
+
+export default router;

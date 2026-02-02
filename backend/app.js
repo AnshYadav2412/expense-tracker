@@ -4,6 +4,7 @@ import path from "path";
 import connectDb from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import incomeRoutes from "./routes/incomeRoutes.js";
+import expenseRoutes from "./routes/expenseRoutes.js";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -34,6 +35,7 @@ connectDb();
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/income", incomeRoutes);
+app.use("/api/v1/expense", expenseRoutes);
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
