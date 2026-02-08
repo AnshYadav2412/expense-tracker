@@ -10,6 +10,7 @@ import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
 import { getThousandsSeparator } from "../../utils/helper";
 import RecentTransactions from "../../components/dashboard/RecentTransactions";
 import FinanceOverview from "../../components/dashboard/FinanceOverview";
+import ExpenseTransactions from "../../components/dashboard/ExpenseTransactions";
 
 const Home = () => {
   useUserAuth();
@@ -18,7 +19,6 @@ const Home = () => {
 
   const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(false);
-
   const fetchDashboardData = async () => {
     if (loading) return;
 
@@ -76,6 +76,11 @@ const Home = () => {
             totalBalance={dashboardData?.totalBalance || 0}
             totalIncome={dashboardData?.totalIncome || 0}
             totalExpense={dashboardData?.totalExpense || 0}
+          />
+
+          <ExpenseTransactions
+            transactions={dashboardData?.last60DayExpenses?.transactions || []}
+            onSeeMore={() => navigate("/expense")}
           />
         </div>
       </div>
