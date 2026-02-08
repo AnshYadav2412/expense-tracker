@@ -11,6 +11,7 @@ import { getThousandsSeparator } from "../../utils/helper";
 import RecentTransactions from "../../components/dashboard/RecentTransactions";
 import FinanceOverview from "../../components/dashboard/FinanceOverview";
 import ExpenseTransactions from "../../components/dashboard/ExpenseTransactions";
+import Last60DayExpenses from "../../components/dashboard/Last60DayExpenses";
 
 const Home = () => {
   useUserAuth();
@@ -81,6 +82,10 @@ const Home = () => {
           <ExpenseTransactions
             transactions={dashboardData?.last60DayExpenses?.transactions || []}
             onSeeMore={() => navigate("/expense")}
+          />
+
+          <Last60DayExpenses
+            data={dashboardData?.last60DayExpenses?.transactions || []}
           />
         </div>
       </div>
