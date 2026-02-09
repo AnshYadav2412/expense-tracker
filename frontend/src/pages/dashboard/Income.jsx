@@ -3,6 +3,7 @@ import DashboardLayout from "../../components/layouts/DashboardLayout";
 import IncomeOverview from "../../components/income/IncomeOverview";
 import { API_PATHS } from "../../utils/apiPaths";
 import axiosInstance from "../../utils/axiosInstance";
+import Model from "../../components/layouts/Model";
 
 const Income = () => {
   const [incomeData, setIncomeData] = useState([]);
@@ -11,7 +12,7 @@ const Income = () => {
     show: false,
     data: null,
   });
-  const [openAddIncomeModel, setOpenAddIncomeModel] = useState(false);
+  const [openAddIncomeModel, setOpenAddIncomeModel] = useState(true);
 
   const fetchIncomeDetails = async () => {
     if (loading) {
@@ -55,6 +56,14 @@ const Income = () => {
             />
           </div>
         </div>
+
+        <Model
+          isOpen={openAddIncomeModel}
+          onClose={() => setOpenAddIncomeModel(false)}
+          title="Add Income"
+        >
+          <div className="">Add Income form</div>
+        </Model>
       </div>
     </DashboardLayout>
   );
