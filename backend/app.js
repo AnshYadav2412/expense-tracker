@@ -19,7 +19,7 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "https://expense-tracker-akch.vercel.app",
+      "https://expense-tracker-five-pi-75.vercel.app",
       "http://localhost:5173",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
