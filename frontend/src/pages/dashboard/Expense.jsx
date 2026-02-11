@@ -9,7 +9,6 @@ import ExpenseList from "../../components/expense/ExpenseList";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import toast from "react-hot-toast";
-import axios from "axios";
 
 const Expense = () => {
   useUserAuth();

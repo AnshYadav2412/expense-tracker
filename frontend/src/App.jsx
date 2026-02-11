@@ -1,11 +1,10 @@
-import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/auth/Login";
 import Home from "./pages/dashboard/Home";
 import Signup from "./pages/auth/Signup";
 import Income from "./pages/dashboard/Income";
 import Expense from "./pages/dashboard/Expense";
-import UserProvider from "./context/userContext";
+import UserProvider from "./context/UserContext";
 import { Toaster } from "react-hot-toast";
 
 const App = () => {
