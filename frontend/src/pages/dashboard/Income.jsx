@@ -6,6 +6,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import Model from "../../components/layouts/Model";
 import AddIncomeForm from "../../components/income/AddIncomeForm";
 import toast from "react-hot-toast";
+import IncomeList from "../../components/income/IncomeList";
 
 const Income = () => {
   const [incomeData, setIncomeData] = useState([]);
@@ -93,6 +94,14 @@ const Income = () => {
             />
           </div>
         </div>
+
+        <IncomeList
+          transactions={incomeData}
+          onDelete={() => {
+            setOpenDeleteAlert({ show: true, data: id });
+          }}
+          onDownload={handleDownloadIncomeDetails}
+        />
 
         <Model
           isOpen={openAddIncomeModel}
