@@ -19,19 +19,15 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "https://expense-tracker-five-pi-75.vercel.app",
-      "http://localhost:5173",
+      "https://expense-tracker-akch.vercel.app/",
+      "http://localhost:5173/",
     ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
 
-app.options("*", cors());
-
 app.use(express.json());
 
-const PORT = process.env.PORT || 8080;
+// const PORT = process.env.PORT || 8080;
 
 app.get("/", (req, res) => {
   res.send("Hello there");
