@@ -3,13 +3,13 @@ import TransactionInfoCard from "../cards/TransactionInfoCard";
 import { LuDownload } from "react-icons/lu";
 import moment from "moment";
 
-const ExpenseList = ({ transactions, onDelete, onDowload }) => {
+const ExpenseList = ({ transactions, onDelete, onDownload }) => {
   return (
     <div className="card">
       <div className="flex items-center justify-between">
         <h5 className="text-lg">Expense Categories</h5>
 
-        <button className="card-btn" onClick={onDowload}>
+        <button className="card-btn" onClick={onDownload}>
           <LuDownload className="text-base" />
           Download
         </button>
