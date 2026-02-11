@@ -6,6 +6,10 @@ import DeleteAlert from "../../components/layouts/DeleteAlert";
 import useUserAuth from "../../hooks/useUserAuth";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
 import ExpenseList from "../../components/expense/ExpenseList";
+import axiosInstance from "../../utils/axiosInstance";
+import { API_PATHS } from "../../utils/apiPaths";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const Expense = () => {
   useUserAuth();
@@ -18,11 +22,77 @@ const Expense = () => {
   });
   const [openAddExpenseModel, setOpenAddExpenseModel] = useState(false);
 
-  const fetchExpenseDetails = async () => {};
+  const fetchExpenseDetails = async () => {
+    if (loading) return;
 
-  const handleAddExpense = async (income) => {};
+    setLoading(true);
 
-  const deleteExpense = async (id) => {};
+    try {
+      const response = await axiosInstance.get(
+        `${API_PATHS.EXPENSE.GET_ALL_EXPENSE}`,
+      );
+
+      if (response.data) {
+        setExpenseData(response.data);
+      }
+    } catch (error) {
+      console.log("Something went wrong.", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAddExpense = async (expense) => {
+    const { category, amount, date, icon } = expense;
+
+    if (!category.trim()) {
+      toast.error("Category is required");
+      return;
+    }
+
+    if (!amount || isNaN(amount) || Number(amount) == 0) {
+      toast.error("Amount must be a valid number greater than 0");
+      return;
+    }
+
+    if (!date) {
+      toast.error("Date is required");
+      return;
+    }
+
+    try {
+      await axiosInstance.post(API_PATHS.EXPENSE.ADD_EXPENSE, {
+        icon,
+        category,
+        amount,
+        date,
+      });
+
+      setOpenAddExpenseModel(false);
+      toast.success("Expense Added");
+
+      fetchExpenseDetails();
+    } catch (error) {
+      console.error(
+        "Error adding Expense",
+        error.response?.data?.message || error.message,
+      );
+    }
+  };
+
+  const deleteExpense = async (id) => {
+    try {
+      await axiosInstance.delete(API_PATHS.EXPENSE.DELETE_EXPENSE(id));
+      setOpenDeleteAlert(false);
+      toast.success("Deleted successfully");
+      fetchExpenseDetails();
+    } catch (error) {
+      console.error(
+        "Error deleting Expense",
+        error.response?.data?.message || error.message,
+      );
+    }
+  };
 
   const handleDownloadExpenseDetails = async () => {};
 

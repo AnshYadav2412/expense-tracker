@@ -18,10 +18,10 @@ const AddExpenseForm = ({ onAddExpense }) => {
         onSelect={(selectedIcon) => handleChange("icon", selectedIcon)}
       />
       <Input
-        value={expense.source}
-        onChange={({ target }) => handleChange("source", target.value)}
-        label="expense Source"
-        placeholder="Freelance,Salary,etc..."
+        value={expense.category}
+        onChange={({ target }) => handleChange("category", target.value)}
+        label="Expense Category"
+        placeholder="Essentials,etc..."
         type="text"
       />
       <Input
