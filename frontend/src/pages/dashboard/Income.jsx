@@ -7,6 +7,7 @@ import Model from "../../components/layouts/Model";
 import AddIncomeForm from "../../components/income/AddIncomeForm";
 import toast from "react-hot-toast";
 import IncomeList from "../../components/income/IncomeList";
+import DeleteAlert from "../../components/layouts/DeleteAlert";
 
 const Income = () => {
   const [incomeData, setIncomeData] = useState([]);
@@ -97,7 +98,7 @@ const Income = () => {
 
         <IncomeList
           transactions={incomeData}
-          onDelete={() => {
+          onDelete={(id) => {
             setOpenDeleteAlert({ show: true, data: id });
           }}
           onDownload={handleDownloadIncomeDetails}
@@ -109,6 +110,17 @@ const Income = () => {
           title="Add Income"
         >
           <AddIncomeForm onAddIncome={handleAddIncome} />
+        </Model>
+
+        <Model
+          isOpen={openDeleteAlert.show}
+          onClose={() => setOpenDeleteAlert({ show: false, data: null })}
+          title="Delete Income"
+        >
+          <DeleteAlert
+            content="Are you sure you want to delete this?"
+            onDelete={() => deleteIncome(openDeleteAlert.data)}
+          />
         </Model>
       </div>
     </DashboardLayout>
