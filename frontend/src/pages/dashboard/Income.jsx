@@ -5,6 +5,7 @@ import { API_PATHS } from "../../utils/apiPaths";
 import axiosInstance from "../../utils/axiosInstance";
 import Model from "../../components/layouts/Model";
 import AddIncomeForm from "../../components/income/AddIncomeForm";
+import toast from "react-hot-toast";
 
 const Income = () => {
   const [incomeData, setIncomeData] = useState([]);
@@ -13,7 +14,7 @@ const Income = () => {
     show: false,
     data: null,
   });
-  const [openAddIncomeModel, setOpenAddIncomeModel] = useState(true);
+  const [openAddIncomeModel, setOpenAddIncomeModel] = useState(false);
 
   const fetchIncomeDetails = async () => {
     if (loading) {
@@ -88,7 +89,7 @@ const Income = () => {
           <div className="">
             <IncomeOverview
               transactions={incomeData}
-              onAddIncome={() => setOpenAddIncomeModal(true)}
+              onAddIncome={() => setOpenAddIncomeModel(true)}
             />
           </div>
         </div>
