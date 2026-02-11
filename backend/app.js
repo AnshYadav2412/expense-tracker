@@ -46,6 +46,4 @@ app.use("/api/v1/dashboard", dashboardRoutes);
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-app.listen(PORT, () => {
-  console.log(`Server running at port ${PORT}`);
-});
+export default app;
