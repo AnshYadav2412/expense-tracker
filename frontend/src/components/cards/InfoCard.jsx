@@ -10,7 +10,7 @@ const InfoCard = ({ icon, label, value, color }) => {
       </div>
       <div className="">
         <h6 className="text-sm text-gray-500 mb-1">{label}</h6>
-        <span>${value}</span>
+        <span>₹{value}</span>
       </div>
     </div>
   );
