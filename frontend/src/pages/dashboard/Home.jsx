@@ -14,6 +14,7 @@ import ExpenseTransactions from "../../components/dashboard/ExpenseTransactions"
 import Last60DayExpenses from "../../components/dashboard/Last60DayExpenses";
 import RecentIncomeWithChart from "../../components/dashboard/RecentIncomeWithChart";
 import RecentIncome from "../../components/dashboard/RecentIncome";
+import { OrbitProgress } from "react-loading-indicators";
 
 const Home = () => {
   useUserAuth();
@@ -47,6 +48,11 @@ const Home = () => {
   return (
     <DashboardLayout activeMenu="Dashboard">
       <div className="my-5 mx-auto">
+        {loading && (
+          <div className="w-full flex justify-center items-center">
+            <OrbitProgress variant="spokes" color="#875cf5" size="small" />
+          </div>
+        )}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <InfoCard
             icon={<IoMdCard />}
