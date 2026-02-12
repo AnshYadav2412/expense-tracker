@@ -18,16 +18,16 @@ const app = express();
 
 app.use(
   cors({
-    origin: [
-      "https://expense-tracker-akch.vercel.app/",
-      "http://localhost:5173/",
-    ],
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   }),
 );
 
 app.use(express.json());
 
-// const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 
 app.get("/", (req, res) => {
   res.send("Hello there");
@@ -41,5 +41,9 @@ app.use("/api/v1/expense", expenseRoutes);
 app.use("/api/v1/dashboard", dashboardRoutes);
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+app.listen(PORT, () => {
+  console.log("server listening at port", PORT);
+});
 
 export default app;

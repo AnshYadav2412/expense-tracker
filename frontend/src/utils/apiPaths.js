@@ -1,4 +1,4 @@
-export const BASE_URL = "https://expense-tracker-five-pi-75.vercel.app/";
+export const BASE_URL = "http://localhost:8000";
 
 export const API_PATHS = {
   AUTH: {
