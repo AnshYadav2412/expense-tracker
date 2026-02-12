@@ -15,6 +15,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const { updateUser } = useContext(UserContext);
 
@@ -22,6 +23,9 @@ const Signup = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
 
+    if (loading) return;
+
+    setLoading(true);
     let profileImageUrl = "";
 
     if (!fullName) {
@@ -68,6 +72,8 @@ const Signup = () => {
       } else {
         setError("Something went wrong. Please try again.");
       }
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -101,6 +107,11 @@ const Signup = () => {
             placeholder="Min 8 Characters"
             type="password"
           />
+          {loading && (
+            <div className="w-full flex justify-center items-center">
+              <OrbitProgress variant="spokes" color="#875cf5" size="small" />
+            </div>
+          )}
           {error && <p className="text-red-500 text-xs pb-2.5">{error}</p>}
 
           <button type="submit" className="btn-primary">

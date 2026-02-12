@@ -6,16 +6,21 @@ import { validateEmail } from "../../utils/helper";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
 import { UserContext } from "../../context/UserContext";
+import { OrbitProgress } from "react-loading-indicators";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const { updateUser } = useContext(UserContext);
 
   const navigate = useNavigate();
   const handleLogin = async (e) => {
+    if (loading) return;
+
+    setLoading(true);
     e.preventDefault();
 
     if (!validateEmail(email)) {
@@ -51,6 +56,8 @@ const Login = () => {
       } else {
         setError("Something went wrong. Please try again.");
       }
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -76,6 +83,11 @@ const Login = () => {
             placeholder="Min 8 Characters"
             type="password"
           />
+          {loading && (
+            <div className="w-full flex justify-center items-center">
+              <OrbitProgress variant="spokes" color="#875cf5" size="small" />
+            </div>
+          )}
           {error && <p className="text-red-500 text-xs pb-2.5">{error}</p>}
 
           <button type="submit" className="btn-primary">
