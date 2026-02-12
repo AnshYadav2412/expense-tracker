@@ -15,6 +15,7 @@ const Expense = () => {
 
   const [expenseData, setExpenseData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [adding, setAdding] = useState(false);
   const [openDeleteAlert, setOpenDeleteAlert] = useState({
     show: false,
     data: null,
@@ -42,6 +43,9 @@ const Expense = () => {
   };
 
   const handleAddExpense = async (expense) => {
+    if (adding) return;
+
+    setAdding(true);
     const { category, amount, date, icon } = expense;
 
     if (!category.trim()) {
@@ -76,6 +80,8 @@ const Expense = () => {
         "Error adding Expense",
         error.response?.data?.message || error.message,
       );
+    } finally {
+      setAdding(false);
     }
   };
 
@@ -148,7 +154,7 @@ const Expense = () => {
           onClose={() => setOpenAddExpenseModel(false)}
           title="Add Expense"
         >
-          <AddExpenseForm onAddExpense={handleAddExpense} />
+          <AddExpenseForm onAddExpense={handleAddExpense} adding={adding} />
         </Model>
 
         <Model

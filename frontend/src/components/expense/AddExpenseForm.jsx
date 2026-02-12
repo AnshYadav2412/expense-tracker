@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Input from "../inputs/Input";
 import EmojiPickerPopUp from "../layouts/EmojiPickerPopUp";
 
-const AddExpenseForm = ({ onAddExpense }) => {
+const AddExpenseForm = ({ onAddExpense, adding }) => {
   const [expense, setExpense] = useState({
     category: "",
     amount: "",
@@ -43,10 +43,10 @@ const AddExpenseForm = ({ onAddExpense }) => {
       <div className="flex justify-end mt-6">
         <button
           type="button"
-          className="add-btn add-btn-fill"
+          className={`add-btn ${!adding && "add-btn-fill"}`}
           onClick={() => onAddExpense(expense)}
         >
-          Add Expense
+          {adding ? "Adding..." : "Add Expense"}
         </button>
       </div>
     </div>

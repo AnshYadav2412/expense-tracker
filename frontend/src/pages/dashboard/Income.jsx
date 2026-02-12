@@ -15,6 +15,7 @@ const Income = () => {
 
   const [incomeData, setIncomeData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [adding, setAdding] = useState(false);
   const [openDeleteAlert, setOpenDeleteAlert] = useState({
     show: false,
     data: null,
@@ -44,6 +45,9 @@ const Income = () => {
   };
 
   const handleAddIncome = async (income) => {
+    if (adding) return;
+
+    setAdding(true);
     const { source, amount, date, icon } = income;
 
     if (!source.trim()) {
@@ -77,6 +81,8 @@ const Income = () => {
         "Error adding income",
         error.response?.data?.message || error.message,
       );
+    } finally {
+      setAdding(false);
     }
   };
 
@@ -148,7 +154,7 @@ const Income = () => {
           onClose={() => setOpenAddIncomeModel(false)}
           title="Add Income"
         >
-          <AddIncomeForm onAddIncome={handleAddIncome} />
+          <AddIncomeForm onAddIncome={handleAddIncome} adding={adding} />
         </Model>
 
         <Model
