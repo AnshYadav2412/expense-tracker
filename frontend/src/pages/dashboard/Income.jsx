@@ -16,6 +16,7 @@ const Income = () => {
   const [incomeData, setIncomeData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [adding, setAdding] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const [openDeleteAlert, setOpenDeleteAlert] = useState({
     show: false,
     data: null,
@@ -87,6 +88,8 @@ const Income = () => {
   };
 
   const deleteIncome = async (id) => {
+    if (deleting) return;
+    setDeleting(true);
     try {
       await axiosInstance.delete(API_PATHS.INCOME.DELETE_iNCOME(id));
       setOpenDeleteAlert({ show: false, data: null });
@@ -97,6 +100,8 @@ const Income = () => {
         "Error deleting income",
         error.response?.data?.message || error.message,
       );
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -165,6 +170,7 @@ const Income = () => {
           <DeleteAlert
             content="Are you sure you want to delete this?"
             onDelete={() => deleteIncome(openDeleteAlert.data)}
+            deleting={deleting}
           />
         </Model>
       </div>

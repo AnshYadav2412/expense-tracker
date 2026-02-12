@@ -16,6 +16,7 @@ const Expense = () => {
   const [expenseData, setExpenseData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [adding, setAdding] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const [openDeleteAlert, setOpenDeleteAlert] = useState({
     show: false,
     data: null,
@@ -86,6 +87,8 @@ const Expense = () => {
   };
 
   const deleteExpense = async (id) => {
+    if (deleting) return;
+    setDeleting(true);
     try {
       await axiosInstance.delete(API_PATHS.EXPENSE.DELETE_EXPENSE(id));
       setOpenDeleteAlert(false);
@@ -96,6 +99,8 @@ const Expense = () => {
         "Error deleting Expense",
         error.response?.data?.message || error.message,
       );
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -165,6 +170,7 @@ const Expense = () => {
           <DeleteAlert
             content="Are you sure you want to delete this?"
             onDelete={() => deleteExpense(openDeleteAlert.data)}
+            deleting={deleting}
           />
         </Model>
       </div>
